@@ -4,7 +4,6 @@ Dans le cadre d’un projet de création d’une application web de gestion immo
 
 ## Pour commencer
 
-Entrez ici les instructions pour bien débuter avec votre projet...
 L'API REST suivante a été codé en python avec l'environnement de developpement Pycharm de JetBrain. Le Framework est Flask et j'utilise le Command Prompt d'Anaconda.
 
 ### Pré-requis
@@ -22,10 +21,13 @@ Si besoin :
 Pour lancer le server en local :
 
 * Avec le Command Prompt à l'emplacement de votre projet :
+
 Executez la commande ``set FLASK_APP=main.py``
+
 Executez la commande ``flask run``
 
 * Puis dans le navigateur web :
+
 Entrer l'URL ``http://127.0.0.1:5000/index``
 
 Ensuite vous pouvez montrer ce que vous obtenez au final...
@@ -36,7 +38,7 @@ Dites comment faire pour lancer votre projet
 
 ## Fabriqué avec
 
-_exemples :_
+_Choix technologiques :_
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/) - Framework Flask (back-end)
 * [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/) - Environnement de développement
 * [Anaconda](https://www.anaconda.com/) - Command Prompt
