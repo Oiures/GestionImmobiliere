@@ -7,7 +7,8 @@ c = conn.cursor()  # The database will be saved in the location where your 'py' 
 c.execute('''CREATE TABLE Users
              ([user_id] INTEGER PRIMARY KEY,
              [user_lname] text, 
-             [user_fname] text)''')
+             [user_fname] text,
+             [user_birthday] date)''')
 
 # Create table - Goods
 c.execute('''CREATE TABLE Goods
@@ -17,25 +18,25 @@ c.execute('''CREATE TABLE Goods
               [good_city] text, 
               [good_type] text, 
               [good_rooms] integer, 
-              [good_caracteristique] text,
+              [good_feature] text,
               [user_id] integer,
               CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES Users(user_id))''')
 
 # Insert into table - Users
-c.execute('''INSERT INTO Users (user_id, user_lname, user_fname) VALUES
-    (0, 'Parra', 'Morgan'),
-    (1, 'Rougerie', 'Aurelien'),
-    (2, 'James', 'Brock'),
-    (3, 'Lopez', 'Camille')''')
+c.execute('''INSERT INTO Users (user_lname, user_fname, user_birthday) VALUES
+    ('Parra', 'Morgan', '17/01/1994'),
+    ('Rougerie', 'Aurelien', '18/02/1995'),
+    ('James', 'Brock', '19/03/1996'),
+    ('Lopez', 'Camille', '20/04/1997')''')
 
 # Insert into table - Users
-c.execute('''INSERT INTO Goods (good_id, good_name, good_description, good_city, good_type, good_rooms, 
-                                                                                good_caracteristique, user_id) VALUES
-    (0, 'Bel appart', 'Un bel appartement dans le 6 ème', 'Lyon', 'Appartement', 5, '5 pieces en carton', 0),
-    (1, 'Petite maison', 'Une belle petite maison dans le 2nd', 'Lyon', 'Maison', 2, '2 pieces en allumium', 0),
-    (2, 'Tente confortable', 'Tente à louer dans le champs de René', 'Issoire', 'Tente', 1, '1 pièce, c est une tente', 1),
-    (3, 'Grande maison', 'Une belle grande maison', 'Paris', 'Maison', 4, '4 pièce lumineuse,', 2),
-    (4, 'Le chateau de l ancetre', 'Un grand chateau ayant appartenu à l ancetre', 'Paris', 'Chateau', 50, '50 pièces car c est un chateau', 2)''')
+c.execute('''INSERT INTO Goods (good_name, good_description, good_city, good_type, good_rooms, 
+                                                                                good_feature, user_id) VALUES
+    ('Bel appart', 'Un bel appartement dans le 6 ème', 'Lyon', 'Appartement', 5, '5 pieces en carton', 1),
+    ('Petite maison', 'Une belle petite maison dans le 2nd', 'Lyon', 'Maison', 2, '2 pieces en allumium', 1),
+    ('Tente confortable', 'Tente à louer dans le champs de René', 'Issoire', 'Tente', 1, '1 pièce, c est une tente', 2),
+    ('Grande maison', 'Une belle grande maison', 'Paris', 'Maison', 4, '4 pièce lumineuse,', 3),
+    ('Le chateau de l ancetre', 'Un grand chateau ayant appartenu à l ancetre', 'Paris', 'Chateau', 50, '50 pièces car c est un chateau', 3)''')
 
 
 conn.commit()
