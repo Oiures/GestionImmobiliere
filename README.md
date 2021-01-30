@@ -26,7 +26,7 @@ Executez la commande ``set FLASK_APP=main.py``
 
 Executez la commande ``flask run``
 
-* Puis dans le navigateur web :
+* Puis dans le navigateur web ou Postman:
 
 Entrer l'URL ``http://127.0.0.1:5000/index``
 
