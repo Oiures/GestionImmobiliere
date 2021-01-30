@@ -1,30 +1,32 @@
-# Titre du projet
-_(juste en dessous des badges sympatiques à placer)_
+# GestionImmobilière
 
-[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)  [![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
-
-Une petite description du projet
+Dans le cadre d’un projet de création d’une application web de gestion immobilière, on nous demande de créer un ensemble de microservices. Ces microservices doivent permettre à un utilisateur de renseigner un bien immobilier avec les caractéristiques suivantes : nom, description, type de bien, ville, pièces, caractéristiques des pièces, propriétaire) et de consulter les autres biens disponibles sur la plateforme. 
 
 ## Pour commencer
 
 Entrez ici les instructions pour bien débuter avec votre projet...
+L'API REST suivante a été codé en python avec l'environnement de developpement Pycharm de JetBrain. Le Framework est Flask et j'utilise le Command Prompt d'Anaconda.
 
 ### Pré-requis
 
-Ce qu'il est requis pour commencer avec votre projet...
+Avec de lancer l'application il est necessaire d'installer Flask, de créer un environnement de travail python 3.8.
 
-- Programme 1
-- Programme 2
-- etc...
+- Installer Flask : https://flask.palletsprojects.com/en/1.1.x/installation/#installation
+- Installer environnement virtuel : https://flask.palletsprojects.com/en/1.1.x/installation/#installation
+
+Si besoin :
+- Installer Anaconda : https://www.anaconda.com/
 
 ### Installation
 
-Les étapes pour installer votre programme....
+Pour lancer le server en local :
 
-Dites ce qu'il faut faire...
+* Avec le Command Prompt à l'emplacement de votre projet :
+Executez la commande ``set FLASK_APP=main.py``
+Executez la commande ``flask run``
 
-_exemple_: Executez la commande ``telnet mapscii.me`` pour commencer ensuite [...]
-
+* Puis dans le navigateur web :
+Entrer l'URL ``http://127.0.0.1:5000/index``
 
 Ensuite vous pouvez montrer ce que vous obtenez au final...
 
@@ -34,34 +36,20 @@ Dites comment faire pour lancer votre projet
 
 ## Fabriqué avec
 
-Entrez les programmes/logiciels/ressources que vous avez utilisé pour développer votre projet
-
 _exemples :_
-* [Materialize.css](http://materializecss.com) - Framework CSS (front-end)
-* [Atom](https://atom.io/) - Editeur de textes
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/) - Framework Flask (back-end)
+* [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/) - Environnement de développement
+* [Anaconda](https://www.anaconda.com/) - Command Prompt
 
-## Contributing
-
-Si vous souhaitez contribuer, lisez le fichier [CONTRIBUTING.md](https://example.org) pour savoir comment le faire.
 
 ## Versions
-Listez les versions ici 
-_exemple :_
-**Dernière version stable :** 5.0
-**Dernière version :** 5.1
-Liste des versions : [Cliquer pour afficher](https://github.com/your/project-name/tags)
-_(pour le lien mettez simplement l'URL de votre projets suivi de ``/tags``)_
+
+Liste des versions : [Cliquer pour afficher](https://github.com/Oiures/GestionImmobiliere/tags)
 
 ## Auteurs
-Listez le(s) auteur(s) du projet ici !
-* **Jhon doe** _alias_ [@outout14](https://github.com/outout14)
 
-Lisez la liste des [contributeurs](https://github.com/your/project/contributors) pour voir qui à aidé au projet !
+* **Augustin Bodet** 
 
-_(pour le lien mettez simplement l'URL de votre projet suivi de ``/contirubors``)_
 
-## License
-
-Ce projet est sous licence ``exemple: WTFTPL`` - voir le fichier [LICENSE.md](LICENSE.md) pour plus d'informations
 
 
