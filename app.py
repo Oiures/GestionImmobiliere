@@ -254,6 +254,39 @@ def api_users_add():
 
     return jsonify(results)
 
+@app.route('/api/v1/resources/users/<int:user_id>', methods=['PUT'])
+def api_users_update(user_id):
+    r = request.get_json()
+
+    user_lname = r.get('lname')
+    user_fname = r.get('fname')
+    user_birthday = r.get('birthday')
+
+    query = 'UPDATE users SET '
+    to_filter = []
+
+    if user_lname is not None:
+        query += 'user_lname=?, '
+        to_filter.append(user_lname)
+    if user_fname is not None:
+        query += 'user_fname=?, '
+        to_filter.append(user_fname)
+    if user_birthday is not None:
+        query += 'user_birthday=?, '
+        to_filter.append(user_birthday)
+
+    query = query[:-2] + 'WHERE user_id=' + str(user_id) + ';'
+
+    conn = sqlite3.connect('ImmobCatalogue.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+
+    results = cur.execute(query, to_filter).fetchall()
+
+    conn.commit()
+
+    return jsonify(results)
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page_not_found.html'), 404
