@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('ImmobCatalogue.db')  # You can create a new database by changing the name within the quotes
+conn = sqlite3.connect('./database/ImmobCatalogue.db')  # You can create a new database by changing the name within the quotes
 c = conn.cursor()  # The database will be saved in the location where your 'py' file is saved
 
 # Create table - Users
@@ -8,6 +8,8 @@ c.execute('''CREATE TABLE Users
              ([user_id] INTEGER PRIMARY KEY,
              [user_lname] text, 
              [user_fname] text,
+             [user_email] text, 
+             [user_password] text,
              [user_birthday] date)''')
 
 # Create table - Goods
@@ -21,13 +23,6 @@ c.execute('''CREATE TABLE Goods
               [good_feature] text,
               [user_id] integer,
               CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES Users(user_id))''')
-
-# Insert into table - Users
-c.execute('''INSERT INTO Users (user_lname, user_fname, user_birthday) VALUES
-    ('Parra', 'Morgan', '17/01/1994'),
-    ('Rougerie', 'Aurelien', '18/02/1995'),
-    ('James', 'Brock', '19/03/1996'),
-    ('Lopez', 'Camille', '20/04/1997')''')
 
 # Insert into table - Users
 c.execute('''INSERT INTO Goods (good_name, good_description, good_city, good_type, good_rooms, 
