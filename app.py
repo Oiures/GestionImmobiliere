@@ -92,6 +92,8 @@ def api_goods_filter():
 
     query = query[:-4] + ';'
 
+    print("####   " + query)
+
     conn = sqlite3.connect('ImmobCatalogue.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
@@ -102,6 +104,7 @@ def api_goods_filter():
 
 @app.route('/api/v1/resources/goods', methods=['POST'])
 def api_goods_add():
+
     r = request.get_json()
 
     good_name = r.get('name')
@@ -117,7 +120,6 @@ def api_goods_add():
             "('" + good_name +"', '" + good_description + "', '" + good_city + "', '" + good_type + "', " + good_rooms + \
             ", '" + good_feature + "', " + user_id +");"
 
-
     conn = sqlite3.connect('ImmobCatalogue.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
@@ -128,13 +130,56 @@ def api_goods_add():
 
     return jsonify(results)
 
-"""@app.route('/movies/<int:index>', methods=['PUT'])
-def api_goods_update(index):
-    movie = request.get_json()
-    movies[index] = movie
-    return jsonify(movies[index]), 200
+@app.route('/api/v1/resources/goods/<int:good_id>', methods=['PUT'])
+def api_goods_update(good_id):
+    r = request.get_json()
 
-@app.route('/movies/<int:index>', methods=['DELETE'])
+    good_name = r.get('name')
+    good_description = r.get('description')
+    good_city = r.get('city')
+    good_type = r.get('type')
+    good_rooms = str(r.get('rooms'))
+    good_feature = r.get('feature')
+    user_id = str(r.get('owner'))
+
+    query = 'UPDATE goods SET '
+    to_filter = []
+
+    if good_name is not None:
+        query += 'good_name=?, '
+        to_filter.append(good_name)
+    if good_description is not None:
+        query += 'good_description=?, '
+        to_filter.append(good_description)
+    if good_city is not None:
+        query += 'good_city=?, '
+        to_filter.append(good_city)
+    if good_type is not None:
+        query += 'good_type=?, '
+        to_filter.append(good_type)
+    if good_rooms is not None:
+        query += 'good_rooms=?, '
+        to_filter.append(good_rooms)
+    if good_feature is not None:
+        query += 'good_feature=?, '
+        to_filter.append(good_feature)
+    if user_id is not None:
+        query += 'user_id=?, '
+        to_filter.append(user_id)
+
+    query = query[:-2] + 'WHERE good_id=' + str(good_id) + ';'
+
+    conn = sqlite3.connect('ImmobCatalogue.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+
+    results = cur.execute(query, to_filter).fetchall()
+
+    conn.commit()
+
+    return jsonify(results)
+
+"""@app.route('/movies/<int:index>', methods=['DELETE'])
 def api_goods_delete(index):
     movies.pop(index)
     return 'None', 200"""
@@ -187,6 +232,27 @@ def api_users_filter():
 
     return jsonify(results)
 
+@app.route('/api/v1/resources/users', methods=['POST'])
+def api_users_add():
+    r = request.get_json()
+
+    user_lname = r.get('lname')
+    user_fname = r.get('fname')
+    user_birthday = r.get('birthday')
+
+    query = u"INSERT INTO users (user_lname, user_fname, user_birthday) VALUES " \
+            "('" + user_lname +"', '" + user_fname + "', '" + user_birthday +"');"
+
+
+    conn = sqlite3.connect('ImmobCatalogue.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+
+    results = cur.execute(query).fetchall()
+
+    conn.commit()
+
+    return jsonify(results)
 
 @app.errorhandler(404)
 def page_not_found(error):
