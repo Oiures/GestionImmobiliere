@@ -179,11 +179,23 @@ def api_goods_update(good_id):
 
     return jsonify(results)
 
-"""@app.route('/movies/<int:index>', methods=['DELETE'])
-def api_goods_delete(index):
-    movies.pop(index)
-    return 'None', 200"""
+@app.route('/api/v1/resources/goods/<int:good_id>', methods=['DELETE'])
+def api_goods_delete(good_id):
+    query = 'DELETE FROM goods WHERE '
+    to_filter = []
 
+    query += 'good_id=? ;'
+    to_filter.append(good_id)
+
+    conn = sqlite3.connect('ImmobCatalogue.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+
+    results = cur.execute(query, to_filter).fetchall()
+
+    conn.commit()
+
+    return jsonify(results)
 
 @app.route('/api/v1/resources/users/all', methods=['GET'])
 def api_users_all():
@@ -276,6 +288,25 @@ def api_users_update(user_id):
         to_filter.append(user_birthday)
 
     query = query[:-2] + 'WHERE user_id=' + str(user_id) + ';'
+
+    conn = sqlite3.connect('ImmobCatalogue.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+
+    results = cur.execute(query, to_filter).fetchall()
+
+    conn.commit()
+
+    return jsonify(results)
+
+
+@app.route('/api/v1/resources/users/<int:user_id>', methods=['DELETE'])
+def api_users_delete(user_id):
+    query = 'DELETE FROM users WHERE '
+    to_filter = []
+
+    query += 'user_id=? ;'
+    to_filter.append(user_id)
 
     conn = sqlite3.connect('ImmobCatalogue.db')
     conn.row_factory = dict_factory
