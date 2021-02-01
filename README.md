@@ -183,7 +183,7 @@ Possible de modifier/supprimer toutes les données de son profil mais pas des au
 
 Possible de creer un bien :
 
-``POST http://127.0.0.1:5000//api/Goods/1`` avec body :
+``POST http://127.0.0.1:5000//api/Goods`` avec body :
 <br/>``{``
 <br/>``    "name": "Petite Hute",``
 <br/>``    "description": "Une petite hute bien chaleureuse",``
