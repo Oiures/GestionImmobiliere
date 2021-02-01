@@ -10,7 +10,7 @@ L'API REST suivante a été codé en python avec l'environnement de developpemen
 
 Avec de lancer l'application il est necessaire d'installer Flask, de créer un environnement de travail python 3.8.
 
-- Installer Flask : https://flask.palletsprojects.com/en/1.1.x/installation/#installation
+- Installer Flask : https://flask.palletsprojects.com/en/1.1.x/installation/#installation  ==> ``pip install  flask``
 - Installer environnement virtuel : https://flask.palletsprojects.com/en/1.1.x/installation/#installation
 
 Si besoin :
