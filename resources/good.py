@@ -15,10 +15,44 @@ class GoodsApi(Resource):
 
     @jwt_required
     def get(self):
+
+        query_parameters = request.args
+
+        good_id = query_parameters.get('id')
+        good_type = query_parameters.get('type')
+        good_city = query_parameters.get('city')
+        good_rooms = query_parameters.get('rooms')
+        user_id = query_parameters.get('owner')
+
+        query = "SELECT * FROM goods WHERE"
+        to_filter = []
+
+        if good_id:
+            query += ' good_id=? AND'
+            to_filter.append(good_id)
+        if good_type:
+            query += ' good_type=? AND'
+            to_filter.append(good_type)
+        if good_city:
+            query += ' good_city=? AND'
+            to_filter.append(good_city)
+        if good_rooms:
+            query += ' good_rooms=? AND'
+            to_filter.append(good_rooms)
+        if user_id:
+            query += ' user_id=? AND'
+            to_filter.append(user_id)
+
+        if query_parameters:
+            query = query[:-4] + ';'
+        else:
+            query = query[:-6] + ';'
+
         conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
-        all_goods = cur.execute('SELECT * FROM goods;').fetchall()
+
+        all_goods = cur.execute(query, to_filter).fetchall()
 
         return jsonify(all_goods)
 

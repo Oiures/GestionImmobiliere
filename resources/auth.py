@@ -72,7 +72,7 @@ class LoginApi(Resource):
         cur = conn.cursor()
         results = cur.execute(query, to_filter).fetchall()
         results_password = results[0]["user_password"]
-        results_id = results[0]["user_password"]
+        results_id = results[0]["user_id"]
 
         authorized = check_password(str(results_password), user_password)
         if not authorized:

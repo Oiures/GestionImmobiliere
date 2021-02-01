@@ -13,10 +13,44 @@ class UsersApi(Resource):
 
     @jwt_required
     def get(self):
+        query_parameters = request.args
+
+        user_id = query_parameters.get('id')
+        user_lname = query_parameters.get('lname')
+        user_fname = query_parameters.get('fname')
+        user_birthday = query_parameters.get('birthday')
+        user_email = query_parameters.get('email')
+
+        query = "SELECT * FROM users WHERE"
+        to_filter = []
+
+        if user_id:
+            query += ' user_id=? AND'
+            to_filter.append(user_id)
+        if user_lname:
+            query += ' user_lname=? AND'
+            to_filter.append(user_lname)
+        if user_fname:
+            query += ' user_fname=? AND'
+            to_filter.append(user_fname)
+        if user_birthday:
+            query += ' user_birthday=? AND'
+            to_filter.append(user_birthday)
+        if user_email:
+            query += ' user_email=? AND'
+            to_filter.append(user_email)
+
+        if query_parameters:
+            query = query[:-4] + ';'
+        else:
+            query = query[:-6] + ';'
+
+        print("#### " + str(query))
+
         conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
-        all_users = cur.execute('SELECT * FROM users;').fetchall()
+        all_users = cur.execute(query, to_filter).fetchall()
 
         return jsonify(all_users)
 
