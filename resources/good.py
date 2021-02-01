@@ -88,7 +88,7 @@ class GoodsApi(Resource):
 class GoodApi(Resource):
 
     def get(self, good_id):
-        query = "SELECT * FROM goods WHERE"
+        query = 'SELECT * FROM goods WHERE'
         to_filter = []
 
         if good_id:
@@ -103,7 +103,7 @@ class GoodApi(Resource):
 
         results = cur.execute(query, to_filter).fetchall()
 
-        return jsonify(results), 200
+        return jsonify(results)
 
     @jwt_required
     def put(self, good_id):

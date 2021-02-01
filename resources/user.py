@@ -77,7 +77,7 @@ class UserApi(Resource):
 
         results = cur.execute(query, to_filter).fetchall()
 
-        return jsonify(results), 200
+        return jsonify(results)
 
     @jwt_required
     def put(self, user_id):
