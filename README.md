@@ -117,7 +117,7 @@ Pas possible de creer un bien particulier :
 <br/>``    "city": "Monaco,"``
 <br/>``    "type": "Hute",``
 <br/>``    "rooms": 1,``
-<br/>``    "feature": "1 piece ronde",``
+<br/>``    "feature": "1 piece ronde"``
 <br/>``}
 ``
 
@@ -190,7 +190,7 @@ Possible de creer un bien :
 <br/>``    "city": "Monaco,"``
 <br/>``    "type": "Hute",``
 <br/>``    "rooms": 1,``
-<br/>``    "feature": "1 piece ronde",``
+<br/>``    "feature": "1 piece ronde"``
 <br/>``}
 ``
 
