@@ -18,11 +18,23 @@ Si besoin :
 
 ### Installation
 
+Pour installer les packages :
+
+* Avec le Command Prompt à l'emplacement de votre projet :
+
+Executez la commande ``pip install flask-restful``
+
+Executez la commande ``pip install flask-bcrypt``
+
+Executez la commande ``pip instll flask-jwt-extended``
+
 Pour lancer le server en local :
 
 * Avec le Command Prompt à l'emplacement de votre projet :
 
-Executez la commande ``set FLASK_APP=main.py``
+Executez la commande ``set FLASK_APP=main.py`` sur Windows ou ``export ENV_FILE_LOCATION=./.env`` sur Linux
+
+Executez la commande ``set ENV_FILE_LOCATION=./.env`` sur Windows ou ``set ENV_FILE_LOCATION=./.env`` sur Linux
 
 Executez la commande ``flask run``
 
