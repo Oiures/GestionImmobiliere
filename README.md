@@ -45,24 +45,23 @@ Dans le navigateur web ou Postman:
 * Création des Users (SignUp):
 
 Entrer l'URL ``POST http://127.0.0.1:5000//api/auth/signup`` avec comme body :
-<br/>``
-{
-<br/>    "lname": "Parra",
-<br/>    "fname": "Morgan",
-<br/>    "birthday": "17/01/1994",
-<br/>    "email": "morgan.parra@gmail.com",
-<br/>    "password" : "carnaval72"
-<br/>}
+<br/>``{``
+<br/>``    "lname": "Parra",``
+<br/>``    "fname": "Morgan",``
+<br/>``    "birthday": "17/01/1994",``
+<br/>``    "email": "morgan.parra@gmail.com",``
+<br/>``    "password" : "carnaval72"``
+<br/>``}
 ``
 <br/>Puis
 <br/>``
-{
-<br/>    "lname": "Rougerie",
-<br/>    "fname": "Aurelien",
-<br/>    "birthday": "18/02/1995",
-<br/>    "email": "aurelien.rougerie@gmail.com",
-<br/>    "password" : "cocorico12"
-<br/>}
+{``
+<br/>``    "lname": "Rougerie",``
+<br/>``    "fname": "Aurelien",``
+<br/>``    "birthday": "18/02/1995",``
+<br/>``    "email": "aurelien.rougerie@gmail.com",``
+<br/>``    "password" : "cocorico12"``
+<br/>``}
 ``
 <br/>Puis
 <br/>``
@@ -76,13 +75,13 @@ Entrer l'URL ``POST http://127.0.0.1:5000//api/auth/signup`` avec comme body :
 ``
 <br/>Puis
 <br/>``
-{
-<br/>    "lname": "Lopez",
-<br/>    "fname": "Camille",
-<br/>    "birthday": "20/04/1997",
-<br/>    "email": "camille.lopez@gmail.com",
-<br/>    "password" : "asm63"
-<br/>}
+{``
+<br/>``    "lname": "Lopez",``
+<br/>``    "fname": "Camille",``
+<br/>``    "birthday": "20/04/1997",``
+<br/>``    "email": "camille.lopez@gmail.com",``
+<br/>``    "password" : "asm63"``
+<br/>``}
 ``
 
 ## Fabriqué avec
