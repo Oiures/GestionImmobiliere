@@ -28,6 +28,12 @@ Executez la commande ``pip install flask-bcrypt``
 
 Executez la commande ``pip instll flask-jwt-extended``
 
+Pour créer la base de donnée :
+
+* Dans le dossier database du projet :
+
+Run le fichier ``build_database.py``
+
 Pour lancer le server en local :
 
 * Avec le Command Prompt à l'emplacement de votre projet :
@@ -65,13 +71,13 @@ Entrer l'URL ``POST http://127.0.0.1:5000//api/auth/signup`` avec comme body :
 ``
 <br/>Puis
 <br/>``
-{
-<br/>    "lname": "James",
-<br/>    "fname": "Brock",
-<br/>    "birthday": "19/03/1996",
-<br/>    "email": "brock.james@gmail.com",
-<br/>    "password" : "balerine42"
-<br/>}
+{``
+<br/>``    "lname": "James",``
+<br/>``    "fname": "Brock",``
+<br/>``    "birthday": "19/03/1996",``
+<br/>``    "email": "brock.james@gmail.com",``
+<br/>``    "password" : "balerine42"``
+<br/>``}
 ``
 <br/>Puis
 <br/>``
@@ -81,6 +87,60 @@ Entrer l'URL ``POST http://127.0.0.1:5000//api/auth/signup`` avec comme body :
 <br/>``    "birthday": "20/04/1997",``
 <br/>``    "email": "camille.lopez@gmail.com",``
 <br/>``    "password" : "asm63"``
+<br/>``}
+``
+
+* Ce qu'il est possible de faire sans être loger :
+
+Possible de regarder la liste des utilisateurs (sans les mot-de-passe):
+
+``GET http://127.0.0.1:5000//api/Users``
+
+Possible de regarder la liste des biens :
+
+``GET http://127.0.0.1:5000//api/Goods``
+
+Possible de rechercher un bien particulier (par id) :
+
+``GET http://127.0.0.1:5000//api/Goods/1``
+
+Possible de rechercher un bien particulier (par id, type, city, rooms, owner) :
+
+``GET http://127.0.0.1:5000//api/Goods?city=Lyon``
+
+Pas possible modifier/supprimer un bien, modifier/supprimer un utilisateur :
+
+``PUT http://127.0.0.1:5000//api/Goods/1`` avec comme body :
+
+<br/>``{``
+<br/>``    "name": "Petite Hute",``
+<br/>``    "description": "Une petite hute bien chaleureuse",``
+<br/>``    "city": "Monaco"``
+<br/>``}
+``
+
+``DELETE http://127.0.0.1:5000//api/Goods/1``
+
+``PUT http://127.0.0.1:5000//api/Users/1`` avec comme body :
+
+<br/>``{``
+<br/>``    "lname": "Gabart",``
+<br/>``    "fname": "Francois",``
+<br/>``    "birthday": "21/05/1998"``
+<br/>``}
+``
+
+``DELETE http://127.0.0.1:5000//api/Users/1``
+
+* Loger un User (Login):
+
+Entrer l'URL ``POST http://127.0.0.1:5000//api/auth/signup`` avec comme body :
+<br/>``{``
+<br/>``    "lname": "Parra",``
+<br/>``    "fname": "Morgan",``
+<br/>``    "birthday": "17/01/1994",``
+<br/>``    "email": "morgan.parra@gmail.com",``
+<br/>``    "password" : "carnaval72"``
 <br/>``}
 ``
 
