@@ -50,7 +50,7 @@ Dans le navigateur web ou Postman:
 
 * Création des Users (SignUp):
 
-Entrer l'URL ``POST http://127.0.0.1:5000//api/auth/signup`` avec comme body :
+``POST http://127.0.0.1:5000//api/auth/signup`` avec comme body :
 <br/>``{``
 <br/>``    "lname": "Parra",``
 <br/>``    "fname": "Morgan",``
@@ -108,10 +108,22 @@ Possible de rechercher un bien particulier (par id, type, city, rooms, owner) :
 
 ``GET http://127.0.0.1:5000//api/Goods?city=Lyon``
 
+Pas possible de creer un bien particulier :
+
+``POST http://127.0.0.1:5000//api/Goods`` avec comme body :
+<br/>``{``
+<br/>``    "name": "Petite Hute",``
+<br/>``    "description": "Une petite hute bien chaleureuse",``
+<br/>``    "city": "Monaco,"``
+<br/>``    "type": "Hute",``
+<br/>``    "rooms": 1,``
+<br/>``    "feature": "1 piece ronde",``
+<br/>``}
+``
+
 Pas possible modifier/supprimer un bien, modifier/supprimer un utilisateur :
 
 ``PUT http://127.0.0.1:5000//api/Goods/1`` avec comme body :
-
 <br/>``{``
 <br/>``    "name": "Petite Hute",``
 <br/>``    "description": "Une petite hute bien chaleureuse",``
@@ -122,7 +134,6 @@ Pas possible modifier/supprimer un bien, modifier/supprimer un utilisateur :
 ``DELETE http://127.0.0.1:5000//api/Goods/1``
 
 ``PUT http://127.0.0.1:5000//api/Users/1`` avec comme body :
-
 <br/>``{``
 <br/>``    "lname": "Gabart",``
 <br/>``    "fname": "Francois",``
@@ -132,15 +143,72 @@ Pas possible modifier/supprimer un bien, modifier/supprimer un utilisateur :
 
 ``DELETE http://127.0.0.1:5000//api/Users/1``
 
-* Loger un User (Login):
+* Loger un User (Login avec clé de hashage):
 
-Entrer l'URL ``POST http://127.0.0.1:5000//api/auth/signup`` avec comme body :
+``POST http://127.0.0.1:5000//api/auth/login`` avec comme body :
 <br/>``{``
-<br/>``    "lname": "Parra",``
-<br/>``    "fname": "Morgan",``
-<br/>``    "birthday": "17/01/1994",``
 <br/>``    "email": "morgan.parra@gmail.com",``
 <br/>``    "password" : "carnaval72"``
+<br/>``}
+``
+
+A partir de maintenant, pour rester identifié avec Morgan Parra copier le token reçu en réponse. Dans vos prochaines requètes, ajouter dans "Authentification" de Postman le token et selectionner dans TYPE ``bearer token``
+
+
+* Ce qu'il est possible de faire en étant loger :
+
+Possible de regarder toutes les données de son profil mais pas des autres (Morgan Parra a l'id 1) :
+
+``GET http://127.0.0.1:5000//api/Users/1`` ==> OK
+
+``GET http://127.0.0.1:5000//api/Users/2`` ==> KO
+
+Possible de modifier/supprimer toutes les données de son profil mais pas des autres (Morgan Parra a l'id 1) :
+
+``PUT http://127.0.0.1:5000//api/Users/1`` avec body :
+<br/>``{``
+<br/>``    "lname": "Gabart",``
+<br/>``    "fname": "Francois",``
+<br/>``    "birthday": "21/05/1998"``
+<br/>``}
+``
+
+``PUT http://127.0.0.1:5000//api/Users/2`` avec body :
+<br/>``{``
+<br/>``    "lname": "Gabart",``
+<br/>``    "fname": "Francois",``
+<br/>``    "birthday": "21/05/1998"``
+<br/>``}
+``
+
+Possible de creer un bien :
+
+``PUT http://127.0.0.1:5000//api/Goods/1`` avec body :
+<br/>``{``
+<br/>``    "name": "Petite Hute",``
+<br/>``    "description": "Une petite hute bien chaleureuse",``
+<br/>``    "city": "Monaco,"``
+<br/>``    "type": "Hute",``
+<br/>``    "rooms": 1,``
+<br/>``    "feature": "1 piece ronde",``
+<br/>``}
+``
+
+Possible de modifier/supprimer toutes les données de ses bien mais pas des autres (Morgan Parra a le bien 1 et 2) :
+
+``PUT http://127.0.0.1:5000//api/Goods/1`` avec body :
+<br/>``{``
+<br/>``    "name": "Petite Hute",``
+<br/>``    "description": "Une petite hute bien chaleureuse",``
+<br/>``    "city": "Monaco"``
+<br/>``}
+``
+
+``PUT http://127.0.0.1:5000//api/Goods/3`` avec body :
+<br/>``{``
+<br/>``    "name": "Petite Hute",``
+<br/>``    "description": "Une petite hute bien chaleureuse",``
+<br/>``    "city": "Monaco"``
 <br/>``}
 ``
 
