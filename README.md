@@ -165,7 +165,7 @@ Possible de regarder toutes les données de son profil mais pas des autres (Morg
 
 Possible de modifier/supprimer toutes les données de son profil mais pas des autres (Morgan Parra a l'id 1) :
 
-``PUT http://127.0.0.1:5000//api/Users/1`` avec body :
+``PUT http://127.0.0.1:5000//api/Users/1`` avec body : ==> OK
 <br/>``{``
 <br/>``    "lname": "Gabart",``
 <br/>``    "fname": "Francois",``
@@ -173,7 +173,7 @@ Possible de modifier/supprimer toutes les données de son profil mais pas des au
 <br/>``}
 ``
 
-``PUT http://127.0.0.1:5000//api/Users/2`` avec body :
+``PUT http://127.0.0.1:5000//api/Users/2`` avec body : ==> KO
 <br/>``{``
 <br/>``    "lname": "Gabart",``
 <br/>``    "fname": "Francois",``
@@ -196,7 +196,7 @@ Possible de creer un bien :
 
 Possible de modifier/supprimer toutes les données de ses bien mais pas des autres (Morgan Parra a le bien 1 et 2) :
 
-``PUT http://127.0.0.1:5000//api/Goods/1`` avec body :
+``PUT http://127.0.0.1:5000//api/Goods/1`` avec body : ==> OK
 <br/>``{``
 <br/>``    "name": "Petite Hute",``
 <br/>``    "description": "Une petite hute bien chaleureuse",``
@@ -204,7 +204,7 @@ Possible de modifier/supprimer toutes les données de ses bien mais pas des autr
 <br/>``}
 ``
 
-``PUT http://127.0.0.1:5000//api/Goods/3`` avec body :
+``PUT http://127.0.0.1:5000//api/Goods/3`` avec body : ==> KO
 <br/>``{``
 <br/>``    "name": "Petite Hute",``
 <br/>``    "description": "Une petite hute bien chaleureuse",``
