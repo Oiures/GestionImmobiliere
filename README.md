@@ -45,44 +45,44 @@ Dans le navigateur web ou Postman:
 * Création des Users (SignUp):
 
 Entrer l'URL ``POST http://127.0.0.1:5000//api/auth/signup`` avec comme body :
-``
+<br/>``
 {
-    "lname": "Parra",
-    "fname": "Morgan",
-    "birthday": "17/01/1994",
-    "email": "morgan.parra@gmail.com",
-    "password" : "carnaval72"
-}
+<br/>    "lname": "Parra",
+<br/>    "fname": "Morgan",
+<br/>    "birthday": "17/01/1994",
+<br/>    "email": "morgan.parra@gmail.com",
+<br/>    "password" : "carnaval72"
+<br/>}
 ``
-Puis
-``
+<br/>Puis
+<br/>``
 {
-    "lname": "Rougerie",
-    "fname": "Aurelien",
-    "birthday": "18/02/1995",
-    "email": "aurelien.rougerie@gmail.com",
-    "password" : "cocorico12"
-}
+<br/>    "lname": "Rougerie",
+<br/>    "fname": "Aurelien",
+<br/>    "birthday": "18/02/1995",
+<br/>    "email": "aurelien.rougerie@gmail.com",
+<br/>    "password" : "cocorico12"
+<br/>}
 ``
-Puis
-``
+<br/>Puis
+<br/>``
 {
-    "lname": "James",
-    "fname": "Brock",
-    "birthday": "19/03/1996",
-    "email": "brock.james@gmail.com",
-    "password" : "balerine42"
-}
+<br/>    "lname": "James",
+<br/>    "fname": "Brock",
+<br/>    "birthday": "19/03/1996",
+<br/>    "email": "brock.james@gmail.com",
+<br/>    "password" : "balerine42"
+<br/>}
 ``
-Puis
-``
+<br/>Puis
+<br/>``
 {
-    "lname": "Lopez",
-    "fname": "Camille",
-    "birthday": "20/04/1997",
-    "email": "camille.lopez@gmail.com",
-    "password" : "asm63"
-}
+<br/>    "lname": "Lopez",
+<br/>    "fname": "Camille",
+<br/>    "birthday": "20/04/1997",
+<br/>    "email": "camille.lopez@gmail.com",
+<br/>    "password" : "asm63"
+<br/>}
 ``
 
 ## Fabriqué avec
