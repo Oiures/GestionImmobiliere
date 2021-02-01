@@ -4,7 +4,7 @@ Dans le cadre d’un projet de création d’une application web de gestion immo
 
 ## Pour commencer
 
-L'API REST suivante a été codé en python avec l'environnement de developpement Pycharm de JetBrain. Le Framework est Flask et j'utilise le Command Prompt d'Anaconda.
+L'API REST suivante a été codé en python avec l'environnement de developpement Pycharm de JetBrain. Le Framework est Flask et j'utilise le Command Prompt d'Anaconda. Je n'ai pas utilisé de SGBD comme MongoDB pour faciliter la création de l'app, j'ai donc créé une BDD à la main.
 
 ### Pré-requis
 
