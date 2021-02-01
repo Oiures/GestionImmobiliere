@@ -114,7 +114,7 @@ Pas possible de creer un bien particulier :
 <br/>``{``
 <br/>``    "name": "Petite Hute",``
 <br/>``    "description": "Une petite hute bien chaleureuse",``
-<br/>``    "city": "Monaco,"``
+<br/>``    "city": "Monaco",``
 <br/>``    "type": "Hute",``
 <br/>``    "rooms": 1,``
 <br/>``    "feature": "1 piece ronde"``
@@ -187,7 +187,7 @@ Possible de creer un bien :
 <br/>``{``
 <br/>``    "name": "Petite Hute",``
 <br/>``    "description": "Une petite hute bien chaleureuse",``
-<br/>``    "city": "Monaco,"``
+<br/>``    "city": "Monaco",``
 <br/>``    "type": "Hute",``
 <br/>``    "rooms": 1,``
 <br/>``    "feature": "1 piece ronde"``
