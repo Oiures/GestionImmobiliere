@@ -32,21 +32,58 @@ Pour lancer le server en local :
 
 * Avec le Command Prompt à l'emplacement de votre projet :
 
-Executez la commande ``set FLASK_APP=main.py`` sur Windows ou ``export ENV_FILE_LOCATION=./.env`` sur Linux
+Executez la commande ``set FLASK_APP=app.py`` sur Windows ou ``export FLASK_APP=app.py`` sur Linux
 
-Executez la commande ``set ENV_FILE_LOCATION=./.env`` sur Windows ou ``set ENV_FILE_LOCATION=./.env`` sur Linux
+Executez la commande ``set ENV_FILE_LOCATION=./.env`` sur Windows ou ``export ENV_FILE_LOCATION=./.env`` sur Linux
 
 Executez la commande ``flask run``
 
-* Puis dans le navigateur web ou Postman:
+## Démarche pour tester le programme sur Postman
 
-Entrer l'URL ``http://127.0.0.1:5000/index``
+Dans le navigateur web ou Postman:
 
-Ensuite vous pouvez montrer ce que vous obtenez au final...
+* Création des Users (SignUp):
 
-## Démarrage
-
-Dites comment faire pour lancer votre projet
+Entrer l'URL ``POST http://127.0.0.1:5000//api/auth/signup`` avec comme body :
+``
+{
+    "lname": "Parra",
+    "fname": "Morgan",
+    "birthday": "17/01/1994",
+    "email": "morgan.parra@gmail.com",
+    "password" : "carnaval72"
+}
+``
+Puis
+``
+{
+    "lname": "Rougerie",
+    "fname": "Aurelien",
+    "birthday": "18/02/1995",
+    "email": "aurelien.rougerie@gmail.com",
+    "password" : "cocorico12"
+}
+``
+Puis
+``
+{
+    "lname": "James",
+    "fname": "Brock",
+    "birthday": "19/03/1996",
+    "email": "brock.james@gmail.com",
+    "password" : "balerine42"
+}
+``
+Puis
+``
+{
+    "lname": "Lopez",
+    "fname": "Camille",
+    "birthday": "20/04/1997",
+    "email": "camille.lopez@gmail.com",
+    "password" : "asm63"
+}
+``
 
 ## Fabriqué avec
 
