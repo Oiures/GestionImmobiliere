@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource
+from flask_jwt_extended import jwt_required
 import sqlite3
 
 
@@ -12,14 +13,16 @@ def dict_factory(cursor, row):
 
 class GoodsApi(Resource):
 
+    @jwt_required
     def get(self):
-        conn = sqlite3.connect('ImmobCatalogue.db')
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
         all_goods = cur.execute('SELECT * FROM goods;').fetchall()
 
         return jsonify(all_goods)
 
+    @jwt_required
     def post(self):
         r = request.get_json()
 
@@ -36,7 +39,7 @@ class GoodsApi(Resource):
                 "('" + good_name +"', '" + good_description + "', '" + good_city + "', '" + good_type + "', " + good_rooms + \
                 ", '" + good_feature + "', " + user_id +");"
 
-        conn = sqlite3.connect('ImmobCatalogue.db')
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
 
@@ -44,11 +47,12 @@ class GoodsApi(Resource):
 
         conn.commit()
 
-        return jsonify(results)
+        return {'good_id': str(cur.lastrowid)}, 200
 
 
 class GoodApi(Resource):
 
+    @jwt_required
     def get(self, good_id):
         query = "SELECT * FROM goods WHERE"
         to_filter = []
@@ -59,14 +63,15 @@ class GoodApi(Resource):
         else:
             return 404
 
-        conn = sqlite3.connect('ImmobCatalogue.db')
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
 
         results = cur.execute(query, to_filter).fetchall()
 
-        return jsonify(results)
+        return jsonify(results), 200
 
+    @jwt_required
     def put(self, good_id):
         r = request.get_json()
 
@@ -105,7 +110,7 @@ class GoodApi(Resource):
 
         query = query[:-2] + 'WHERE good_id=' + str(good_id) + ';'
 
-        conn = sqlite3.connect('ImmobCatalogue.db')
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
 
@@ -113,8 +118,9 @@ class GoodApi(Resource):
 
         conn.commit()
 
-        return jsonify(results)
+        return {'good_id': str(good_id)}, 200
 
+    @jwt_required
     def delete(self, good_id):
         query = 'DELETE FROM goods WHERE '
         to_filter = []
@@ -122,7 +128,7 @@ class GoodApi(Resource):
         query += 'good_id=? ;'
         to_filter.append(good_id)
 
-        conn = sqlite3.connect('ImmobCatalogue.db')
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
 
@@ -130,4 +136,4 @@ class GoodApi(Resource):
 
         conn.commit()
 
-        return jsonify(results)
+        return {'good_id': str(good_id)}, 200

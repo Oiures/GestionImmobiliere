@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource
+from flask_jwt_extended import jwt_required
 import sqlite3
 
 def dict_factory(cursor, row):
@@ -10,14 +11,16 @@ def dict_factory(cursor, row):
 
 class UsersApi(Resource):
 
+    @jwt_required
     def get(self):
-        conn = sqlite3.connect('ImmobCatalogue.db')
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
         all_users = cur.execute('SELECT * FROM users;').fetchall()
 
         return jsonify(all_users)
 
+    @jwt_required
     def post(self):
         r = request.get_json()
 
@@ -28,7 +31,7 @@ class UsersApi(Resource):
         query = u"INSERT INTO users (user_lname, user_fname, user_birthday) VALUES " \
                 "('" + user_lname + "', '" + user_fname + "', '" + user_birthday + "');"
 
-        conn = sqlite3.connect('ImmobCatalogue.db')
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
 
@@ -36,10 +39,11 @@ class UsersApi(Resource):
 
         conn.commit()
 
-        return jsonify(results)
+        return {'user_id': str(cur.lastrowid)}, 200
 
 class UserApi(Resource):
 
+    @jwt_required
     def get(self, user_id):
         query = "SELECT * FROM users WHERE"
         to_filter = []
@@ -50,14 +54,15 @@ class UserApi(Resource):
         else:
             return 404
 
-        conn = sqlite3.connect('ImmobCatalogue.db')
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
 
         results = cur.execute(query, to_filter).fetchall()
 
-        return jsonify(results)
+        return jsonify(results), 200
 
+    @jwt_required
     def put(self, user_id):
         r = request.get_json()
 
@@ -80,7 +85,7 @@ class UserApi(Resource):
 
         query = query[:-2] + 'WHERE user_id=' + str(user_id) + ';'
 
-        conn = sqlite3.connect('ImmobCatalogue.db')
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
 
@@ -88,8 +93,9 @@ class UserApi(Resource):
 
         conn.commit()
 
-        return jsonify(results)
+        return {'user_id': str(user_id)}, 200
 
+    @jwt_required
     def delete(self, user_id):
         query = 'DELETE FROM users WHERE '
         to_filter = []
@@ -97,7 +103,7 @@ class UserApi(Resource):
         query += 'user_id=? ;'
         to_filter.append(user_id)
 
-        conn = sqlite3.connect('ImmobCatalogue.db')
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
 
@@ -105,4 +111,4 @@ class UserApi(Resource):
 
         conn.commit()
 
-        return jsonify(results)
+        return {'user_id': str(user_id)}, 200
