@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 import sqlite3
 
 def dict_factory(cursor, row):
@@ -11,7 +11,6 @@ def dict_factory(cursor, row):
 
 class UsersApi(Resource):
 
-    @jwt_required
     def get(self):
         query_parameters = request.args
 
@@ -21,7 +20,8 @@ class UsersApi(Resource):
         user_birthday = query_parameters.get('birthday')
         user_email = query_parameters.get('email')
 
-        query = "SELECT * FROM users WHERE"
+        #Ne pas afficher le mot de passe
+        query = "SELECT user_id, user_lname, user_fname, user_birthday, user_email  FROM users WHERE"
         to_filter = []
 
         if user_id:
@@ -45,8 +45,6 @@ class UsersApi(Resource):
         else:
             query = query[:-6] + ';'
 
-        print("#### " + str(query))
-
         conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
         cur = conn.cursor()
@@ -54,31 +52,16 @@ class UsersApi(Resource):
 
         return jsonify(all_users)
 
-    @jwt_required
-    def post(self):
-        r = request.get_json()
-
-        user_lname = r.get('lname')
-        user_fname = r.get('fname')
-        user_birthday = r.get('birthday')
-
-        query = u"INSERT INTO users (user_lname, user_fname, user_birthday) VALUES " \
-                "('" + user_lname + "', '" + user_fname + "', '" + user_birthday + "');"
-
-        conn = sqlite3.connect('./database/ImmobCatalogue.db')
-        conn.row_factory = dict_factory
-        cur = conn.cursor()
-
-        results = cur.execute(query).fetchall()
-
-        conn.commit()
-
-        return {'user_id': str(cur.lastrowid)}, 200
 
 class UserApi(Resource):
 
     @jwt_required
     def get(self, user_id):
+        user_id_session = get_jwt_identity()
+
+        if user_id_session != user_id:
+            return 403
+
         query = "SELECT * FROM users WHERE"
         to_filter = []
 
@@ -98,6 +81,11 @@ class UserApi(Resource):
 
     @jwt_required
     def put(self, user_id):
+        user_id_session = get_jwt_identity()
+
+        if user_id_session != user_id:
+            return 403
+
         r = request.get_json()
 
         user_lname = r.get('lname')
@@ -117,7 +105,7 @@ class UserApi(Resource):
             query += 'user_birthday=?, '
             to_filter.append(user_birthday)
 
-        query = query[:-2] + 'WHERE user_id=' + str(user_id) + ';'
+        query = query[:-2] + ' WHERE user_id=' + str(user_id) + ';'
 
         conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
@@ -131,6 +119,11 @@ class UserApi(Resource):
 
     @jwt_required
     def delete(self, user_id):
+        user_id_session = get_jwt_identity()
+
+        if user_id_session != user_id:
+            return 403
+
         query = 'DELETE FROM users WHERE '
         to_filter = []
 

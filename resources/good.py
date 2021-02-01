@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 import sqlite3
 
 
@@ -13,7 +13,6 @@ def dict_factory(cursor, row):
 
 class GoodsApi(Resource):
 
-    @jwt_required
     def get(self):
 
         query_parameters = request.args
@@ -58,6 +57,8 @@ class GoodsApi(Resource):
 
     @jwt_required
     def post(self):
+        user_id_session = get_jwt_identity()
+
         r = request.get_json()
 
         good_name = r.get('name')
@@ -66,12 +67,12 @@ class GoodsApi(Resource):
         good_type = r.get('type')
         good_rooms = str(r.get('rooms'))
         good_feature = r.get('feature')
-        user_id = str(r.get('owner'))
+        #user_id = str(r.get('owner'))
 
         query = u"INSERT INTO goods (good_name, good_description, good_city, good_type, good_rooms, " \
                 "good_feature, user_id) VALUES " \
                 "('" + good_name +"', '" + good_description + "', '" + good_city + "', '" + good_type + "', " + good_rooms + \
-                ", '" + good_feature + "', " + user_id +");"
+                ", '" + good_feature + "', " + user_id_session +");"
 
         conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
@@ -86,7 +87,6 @@ class GoodsApi(Resource):
 
 class GoodApi(Resource):
 
-    @jwt_required
     def get(self, good_id):
         query = "SELECT * FROM goods WHERE"
         to_filter = []
@@ -107,6 +107,23 @@ class GoodApi(Resource):
 
     @jwt_required
     def put(self, good_id):
+        ##Gestion des droit
+        user_id_session = get_jwt_identity()
+
+        query_session = 'SELECT user_id FROM Goods WHERE good_id=' + str(good_id) + ';'
+
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
+        conn.row_factory = dict_factory
+        cur = conn.cursor()
+
+        results_session = cur.execute(query_session).fetchall()
+
+        conn.commit()
+
+        if str(user_id_session) != str(results_session[0]["user_id"]):
+            return 403
+        ##
+
         r = request.get_json()
 
         good_name = r.get('name')
@@ -120,29 +137,29 @@ class GoodApi(Resource):
         query = 'UPDATE goods SET '
         to_filter = []
 
-        if good_name is not None:
+        if good_name:
             query += 'good_name=?, '
             to_filter.append(good_name)
-        if good_description is not None:
+        if good_description:
             query += 'good_description=?, '
             to_filter.append(good_description)
-        if good_city is not None:
+        if good_city:
             query += 'good_city=?, '
             to_filter.append(good_city)
-        if good_type is not None:
+        if good_type:
             query += 'good_type=?, '
             to_filter.append(good_type)
-        if good_rooms is not None:
+        if good_rooms:
             query += 'good_rooms=?, '
             to_filter.append(good_rooms)
-        if good_feature is not None:
+        if good_feature:
             query += 'good_feature=?, '
             to_filter.append(good_feature)
-        if user_id is not None:
+        if user_id:
             query += 'user_id=?, '
             to_filter.append(user_id)
 
-        query = query[:-2] + 'WHERE good_id=' + str(good_id) + ';'
+        query = query[:-2] + ' WHERE good_id=' + str(good_id) + ';'
 
         conn = sqlite3.connect('./database/ImmobCatalogue.db')
         conn.row_factory = dict_factory
@@ -156,6 +173,23 @@ class GoodApi(Resource):
 
     @jwt_required
     def delete(self, good_id):
+        ##Gestion des droit
+        user_id_session = get_jwt_identity()
+
+        query_session = 'SELECT user_id FROM Goods WHERE good_id=' + str(good_id) + ';'
+
+        conn = sqlite3.connect('./database/ImmobCatalogue.db')
+        conn.row_factory = dict_factory
+        cur = conn.cursor()
+
+        results_session = cur.execute(query_session).fetchall()
+
+        conn.commit()
+
+        if str(user_id_session) != str(results_session[0]["user_id"]):
+            return 403
+        ##
+
         query = 'DELETE FROM goods WHERE '
         to_filter = []
 
